@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var express = require('express'),
   app = express(),
   port = process.env.PORT || 3000,
@@ -5,9 +7,10 @@ var express = require('express'),
   Contact = require('./api/models/contact'), //created model loading here
   bodyParser = require('body-parser');
   
-// mongoose instance connection url connection
+// connect Mongoose to your DB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Contactdb'); 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/Contactdb');
+// mongoose.connect('mongodb://localhost/Contactdb'); 
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
